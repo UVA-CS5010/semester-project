@@ -5,7 +5,7 @@ John Hazelton (jch5nb) | Julie Crowe (ykd9ut) | Jake Kolessar (jak4as) | Allie R
 
 The purpose of this project is to examine whether there is a significant difference between the salaries of male National Basketball Association (NBA) players and female Women’s National Basketball Association (WNBA) players. We wanted to determine the levels of different salaries between the two leagues, and inspect these differences based on their various factors. Such factors include player statistics, age, and league affiliation.
 
-Data Web Scraping, Pre-processing, & Cleaning
+##Data Web Scraping, Pre-processing, & Cleaning
 
 With a group interest in both sports and the gender wage-gap, we decided to merge our interests to focus on salary and statistical data for the NBA and WNBA. We found this data significant in not only determining the presence or magnitude of a wage gap in basketball, but also the potential contributors, or differences between leagues that may influence it. The dataset was web scraped from two websites, Spotrac and Basketball Reference, containing player salary information and statistics data, respectively. Web Scraping the data allowed us to tailor the dataframe to the questions being asked and concatenating data from various sources gave us the most robust dataset to analyze. 
 
