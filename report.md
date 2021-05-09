@@ -1,4 +1,3 @@
-![Screen Shot 2021-05-09 at 4 46 47 PM](https://user-images.githubusercontent.com/77371496/117590581-360dfc00-b0fe-11eb-98d2-a58370dd8bb5.jpg)
 # CS5010 Final Project Report - Group 7
 John Hazelton (jch5nb) | Julie Crowe (ykd9ut) | Jake Kolessar (jak4as) | Allie Ridgway (ysx4gm)
 
@@ -62,14 +61,13 @@ Our fourth and final analysis was to build a statistical model. When setting out
 
 NBA output:
 
-
-
-
+![Screen Shot 2021-05-09 at 4 46 47 PM](https://user-images.githubusercontent.com/77371496/117590581-360dfc00-b0fe-11eb-98d2-a58370dd8bb5.jpg)
 
 
 WNBA Output:
 
 
+![Screen Shot 2021-05-09 at 4 47 04 PM](https://user-images.githubusercontent.com/77371496/117590602-53db6100-b0fe-11eb-93ce-745514e1895f.jpg)
 
 ### Multiple Linear Regression Model:
 
