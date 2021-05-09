@@ -19,11 +19,15 @@ Once cleaning the dataset, we decided to first investigate the data through expl
 
 ![Picture1](https://user-images.githubusercontent.com/68548239/117590504-c8fa6680-b0fd-11eb-9f95-025bb313b070.jpg)
 
+![Picture2](https://user-images.githubusercontent.com/68548239/117590526-f21af700-b0fd-11eb-937a-b954f1b2bc1d.jpg)
 
 
-Salary Rank vs Salary by League
+## Salary Rank vs Salary by League
 League vs Salary
 The plots for the two leagues differed to such an extent that the axes were completely unique. Therefore, as a way of more effectively comparing the differences between leagues, we utilized our previously calculated salary ratio statistic (player salary / league revenue). We found this method to be the most efficient way to scale the revenues, though further potential contributing factors are worth noting, such as ticket sales, league profit, or salary caps, which are the maximum amounts teams are allowed to spend on salary, as negotiated between the league and player associations every few years. With an understanding that these scaled salaries are not necessarily a perfect representation of equivalence between leagues, we trusted them in making observations and analyses between the leagues. In the scaled graphs (see below), we discovered that while salaries were now much more comparable between leagues, there was still a rather significant difference. WNBA salary ratios had a median of about 0.2, compared to a value of about 0.3 for NBA players. Furthermore, the spread appeared much greater for NBA players, with those at the top end of the graph making wildly higher portions of league revenue, while WNBA player salaries were grouped much closer together. 
+
+![Picture3](https://user-images.githubusercontent.com/68548239/117590550-08c14e00-b0fe-11eb-907e-1695aac0953b.jpg)
+
 
 ## Salary Rank vs Salary Ratio by League
 
