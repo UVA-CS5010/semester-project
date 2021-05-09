@@ -62,7 +62,7 @@ WNBA Output:
 
 
 
-### Multiple Linear Regression Model:
+Multiple Linear Regression Model:
 
 NBA: salary = 4,096,000 + 2,018,000*AST + 3,098,000*BLK + 534,900*PTS
 
