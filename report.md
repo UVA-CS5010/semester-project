@@ -17,18 +17,22 @@ Before moving on to our analysis, we decided to bolster our data with additional
 
 Once cleaning the dataset, we decided to first investigate the data through exploratory data analysis. The beginning plots of NBA vs. WNBA salaries demonstrated the large difference in wages (see below).
 
+![Picture1](https://user-images.githubusercontent.com/68548239/117590504-c8fa6680-b0fd-11eb-9f95-025bb313b070.jpg)
+
+
+
 Salary Rank vs Salary by League
 League vs Salary
 The plots for the two leagues differed to such an extent that the axes were completely unique. Therefore, as a way of more effectively comparing the differences between leagues, we utilized our previously calculated salary ratio statistic (player salary / league revenue). We found this method to be the most efficient way to scale the revenues, though further potential contributing factors are worth noting, such as ticket sales, league profit, or salary caps, which are the maximum amounts teams are allowed to spend on salary, as negotiated between the league and player associations every few years. With an understanding that these scaled salaries are not necessarily a perfect representation of equivalence between leagues, we trusted them in making observations and analyses between the leagues. In the scaled graphs (see below), we discovered that while salaries were now much more comparable between leagues, there was still a rather significant difference. WNBA salary ratios had a median of about 0.2, compared to a value of about 0.3 for NBA players. Furthermore, the spread appeared much greater for NBA players, with those at the top end of the graph making wildly higher portions of league revenue, while WNBA player salaries were grouped much closer together. 
 
 ## Salary Rank vs Salary Ratio by League
 
-### League vs Salary Ratio
-### Correlation Matrices
+## League vs Salary Ratio
+## Correlation Matrices
 
 For our initial analysis, we chose to create a correlation matrix of each variable within the dataset. The purpose of this analysis was to examine which statistics might be valuable to consider as factors which contributed to salary, as well as statistics which had generally high correlation and might be used as predictors of a successful player. We chose to display the matrix as a heatmap in order to best display the correlations and provide a clear visual representation of the data. 
 
-### Correlation Matrix of Salary & Statistics
+## Correlation Matrix of Salary & Statistics
 
 The heat map above shows a lighter color for strong positive correlation, an orange color for low to no correlation, and dark purple for strong negative correlation. Upon viewing the plot, we see that there appears to be an overall light color, meaning that there is generally a strong correlation between the statistics. Specifically, we see light colors throughout the rows of Field Goals, 2-Point Goals and Attempts, Defensive and Total Rebounds, Turnovers, Points, and Salary. We see a strong negative correlation between Minutes Played and Salary Rank. Lastly, there does not appear to be any correlation between 3-Point Goals, Personal Fouls, and Age among all other variables. From the strong positive and negative correlations, we see that there is a relationship between most of the variables within the dataset. Specifically, we may conclude that these game statistics are overall a strong predictor of salary, and the salary of a player is dependent on their performance in games. We may conclude that the ranking of a players salary among the league is directly related to every statistic except for the amount they play per game. We also conclude that age does not have an impact on the statistics of a player, and further assume that players are not evaluated based on age in the league unless their statistics begin to fall.
 
@@ -36,18 +40,18 @@ The heat map above shows a lighter color for strong positive correlation, an ora
 
 For our second analysis, we compared salaries with games started, and visualized the differences between the two leagues. In the graph (see below), it is clear that the vast majority of players making higher salaries in the NBA were starting all or nearly all of their games, whereas in the WNBA, there was a greater mix of high salaried players starting only a fraction of their games. This visual difference could simply be indicative of how teams structure their lineups differently between the two leagues, or could suggest one league values a starting spot higher. We later sought out to see if this difference would reveal itself as a key significant predictor in our model building process.    
 
-### Salary Ratio vs Percentage of Games Started (GS%)
+## Salary Ratio vs Percentage of Games Started (GS%)
 
-### Salary vs Player Position
+## Salary vs Player Position
 
 Our third analysis investigates the effects of player position on their salary. In the first graph (see below), we looked at player position against salary ratio, while still accounting for the percentage of games started (denoted by the size of a data point’s bubble). Interestingly, we found a noticeable difference in salaries between positions in the NBA, with guards and forwards reaching much higher salary ratios and than any of their center position counterparts. In the WNBA, however, the data points appeared to be distributed evenly across different positions. Again, we kept this potential difference in mind as we considered significant predictors later in our model building process. 
 
-Position vs Salary by League
+## Position vs Salary by League
 When looking at the data in boxplot form (see below), we noticed that the median salaries for centers in the NBA were actually higher than the other positions. It seems only the star guard and forward players, making the highest salaries, were pulling up the averages for those positions, as no centers had salary ratios above 0.005. In the WNBA, median salaries for forwards proved to be much higher than those of guards or centers.
 
-### Salary Ratio vs Percentage of Games Started (GS%)
+## Salary Ratio vs Percentage of Games Started (GS%)
 
-### Model Building: Predicting Salaries from Stats
+## Model Building: Predicting Salaries from Stats
 
 Our fourth and final analysis was to build a statistical model. When setting out to build a predictive model for player salaries based on statistics, we decided to utilize object oriented programming in conjunction with Python’s Sklearn module, featuring a powerful tool for predictive data analysis. We first split our data into training and test datasets, and then performed forward and backward selection techniques to arrive at a multiple linear regression model. We repeated this process twice, once for each league. Upon calculating R-squared values for the forward and backward models, we chose the models with the best R-squared, 0.565 for the NBA, and 0.367 for the WNBA. Then, we looked at summary statistics for the chosen models and decided to drop all but three of the predictors, as the others were insignificant. As a result, we arrived at a model with assists (AST), blocks (BLK), and points (PTS) as predictors for NBA salary, and a model with field goals (FG), assists (AST), and points (PTS) as predictors for WNBA salary (see models below). With these results, it seems the WNBA places a higher value on overall defensive output, whereas the NBA values more all rounded offensive players, with a potential favoring of defensive-minded forwards and centers that are more likely to get blocks.  
 
@@ -62,20 +66,20 @@ WNBA Output:
 
 
 
-Multiple Linear Regression Model:
+### Multiple Linear Regression Model:
 
 NBA: salary = 4,096,000 + 2,018,000*AST + 3,098,000*BLK + 534,900*PTS
-
 WNBA: salary = 57,450 + 15,830*FG + 7703*AST - 63.59*PTS
 
 Based on the output, it appears that it may be harder to predict the WNBA salaries based on the statistics of the players. The WNBA model did not have a strong R-squared value and the P-values for the predictors do not meet the criteria for significance. The NBA model produces a stronger R-Squared value and significant P-values. The group concluded that only the NBA model would be useful for predicting salaries. This could be because the WNBA has less variation in salary range from the lowest paid players to the highest paid players. Another reason may be that the league uses different criteria to determine pay rate such as years of experience in the league. From here, a further investigation into what predicts WNBA salaries would be necessary although it was outside the scope of our groups project.
 
 
-### Model Legitimacy: Undervaluing & Overvaluing Players
+## Model Legitimacy: Undervaluing & Overvaluing Players
 
 After producing our models we decided to further apply them, by analyzing the most overvalued and undervalued players based on their predicted salaries. To do so, we added predicted salary and salary residual columns to our dataframe, manually calculated based on our model equations for each league. We then ranked players, ascending and descending by salary residual, to obtain the lists of most undervalued and overvalued players, respectively. With some knowledge and following of NBA players, we decided to test the legitimacy of this ranking by looking at the top three most undervalued players in the NBA based on our model: Giannis Antetokounmpo, Zach LaVine, and Marcus Smart. These results seemed somewhat reasonable, considering Giannis is a multiple-time MVP, LaVine is a young, budding All-Star on a relatively small contract, and Marcus Smart is a quality-level player on one of the smaller contracts for his age and statistics. 
 
 ## Unit Testing
+
 In order to test the accuracy of our dataset, we performed unit testing on the data gathered from the Web Scraping. As previously described, we used separate sources for both salary data and statistical data among the NBA and WNBA. To thoroughly test these sources, we performed a unit test on each column of data using assertEqual() and tested that the data we were pulling was the desired data from the websites. To begin each class of unit tests, we tested the title of each page. For salary data, the unit tests performed were on player name, team name, player position, player age, and salary. The source for the statistics consisted of one large table, so we tested elements in the table such as player name and position. The code below displays a portion of the testing performed on NBA salary data, including the test for page title, player name, and team name for the first player listed on the website: John Wall.
 
 
