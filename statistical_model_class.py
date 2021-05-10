@@ -10,7 +10,8 @@ from statsmodels.api import add_constant
 import seaborn as sns
 import matplotlib.pyplot as plt
 
-data = pd.read_csv('https://raw.githubusercontent.com/UVA-CS5010/semester-project/main/all_df_updated.csv')
+
+data = pd.read_csv('https://raw.githubusercontent.com/UVA-CS5010/semester-project/main/NBAvsWNBA.csv')
 NBA = data[data['League'] == 'NBA']
 WNBA = data[data['League'] == 'WNBA']
 df = [NBA, WNBA]
@@ -20,7 +21,7 @@ class linearModel:
     def __init__(self, df):
         self.stats = df
         # clean up the dataframe
-        columns_to_drop = ['League', 'Team', 'Position', 'Age', 'Avg_Salary', 'salary_ratio', 'Salary_Rank']
+        columns_to_drop = ['League', 'Team', 'Position', 'Age', 'Avg_Salary', 'salary_ratio', 'GS%', 'Salary_Rank']
         self.stats = self.stats.dropna()
         self.stats = self.stats.drop(columns_to_drop, axis=1)
         # seperate response and predictors
@@ -49,43 +50,61 @@ class linearModel:
         # calculate the R squared value for the model
         self.r_squared = r2_score(self.Y_test, self.y_pred)
 
-    def calc_r_squared_adjusted(self, r_squared):
-        num_pred = len(self.X_train)
-        pred = len(self.X_train.columns)
-        r_squared = abs(r_squared)
-        r_squared_adjusted = 1 - ((1 - r_squared) * (num_pred - 1) / (num_pred - pred - 1))
-        return r_squared_adjusted
+# for league in df:
+name = [x for x in globals() if globals()[x] is NBA][0]
+print("======" + str(name) + "======")
+NBA_full_model = linearModel(NBA)
+NBA_full_model.predict()
+print('Full model R Squared Valued: ' + str(NBA_full_model.r_squared))
 
+NBA_forward_model = linearModel(NBA)
+NBA_forward_model.feature_selection('forward')
+NBA_forward_model.predict()
+print('Forward model R Squared value: ' + str(NBA_forward_model.r_squared))
 
-for league in df:
-    name = [x for x in globals() if globals()[x] is league][0]
-    print("======" + str(name) + "======")
-    full_model = linearModel(league)
-    full_model.predict()
-    print('Full model R Squared Valued: ' + str(full_model.r_squared))
+NBA_backward_model = linearModel(NBA)
+NBA_backward_model.feature_selection('backward')
+NBA_backward_model.predict()
+print('Backward model R Squared value: ' + str(NBA_backward_model.r_squared))
 
-    forward_model = linearModel(league)
-    forward_model.feature_selection('forward')
-    forward_model.predict()
-    print('Forward model R Squared value: ' + str(forward_model.r_squared))
+# Pick the best model based on the R squared value
+NBA_models = {NBA_full_model: NBA_full_model.r_squared, NBA_forward_model: NBA_forward_model.r_squared,
+              NBA_backward_model: NBA_backward_model.r_squared}
+NBA_best = max(NBA_models, key=NBA_models.get)
+NBA_best_name = [x for x in globals() if globals()[x] is NBA_best][0]
+print('Based on the R Squared metric, the ' + str(NBA_best_name) + ' is the best choice.')
+# Print out the statistical summary for the best model
+NBA_best.X_train = add_constant(NBA_best.X_train)
+NBA_new_model = OLS(NBA_best.Y_train, NBA_best.X_train).fit()
+print(NBA_new_model.summary())
+print("==============")
 
-    backward_model = linearModel(league)
-    backward_model.feature_selection('backward')
-    backward_model.predict()
-    print('Backward model R Squared value: ' + str(backward_model.r_squared))
+# for league in df:
+name = [x for x in globals() if globals()[x] is WNBA][0]
+print("======" + str(name) + "======")
+WNBA_full_model = linearModel(WNBA)
+WNBA_full_model.predict()
+print('Full model R Squared Valued: ' + str(WNBA_full_model.r_squared))
 
-    # Pick the best model based on the R squared value
-    models = {full_model: full_model.r_squared, forward_model: forward_model.r_squared,
-              backward_model: backward_model.r_squared}
-    best = max(models, key=models.get)
-    best_name = [x for x in globals() if globals()[x] is best][0]
-    print('Based on the R Squared metric, the ' + str(best_name) + ' is the best choice.')
-    # Print out the statistical summary for the best model
-    best.X_train = add_constant(best.X_train)
-    new_model = OLS(best.Y_train, best.X_train).fit()
-    print(new_model.summary())
-    # Plot the correlation matrix between all the predictors
-    correlation = best.stats.corr()
-    sns.heatmap(correlation, annot=True)
-    plt.show()
-    print("==============")
+WNBA_forward_model = linearModel(WNBA)
+WNBA_forward_model.feature_selection('forward')
+WNBA_forward_model.predict()
+print('Forward model R Squared value: ' + str(WNBA_forward_model.r_squared))
+
+WNBA_backward_model = linearModel(WNBA)
+WNBA_backward_model.feature_selection('backward')
+WNBA_backward_model.predict()
+print('Backward model R Squared value: ' + str(WNBA_backward_model.r_squared))
+
+# Pick the best model based on the R squared value
+WNBA_models = {WNBA_full_model: WNBA_full_model.r_squared, WNBA_forward_model: WNBA_forward_model.r_squared,
+               WNBA_backward_model: WNBA_backward_model.r_squared}
+WNBA_best = max(WNBA_models, key=WNBA_models.get)
+WNBA_best_name = [x for x in globals() if globals()[x] is WNBA_best][0]
+print('Based on the R Squared metric, the ' + str(WNBA_best_name) + ' is the best choice.')
+# Print out the statistical summary for the best model
+WNBA_best.X_train = add_constant(WNBA_best.X_train)
+WNBA_new_model = OLS(WNBA_best.Y_train, WNBA_best.X_train).fit()
+print(WNBA_new_model.summary())
+# Plot the correlation matrix between all the predictors
+print("==============")
